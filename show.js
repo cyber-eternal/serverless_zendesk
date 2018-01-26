@@ -1,5 +1,32 @@
 'use strict';
 
+/////////////////////////////
+//// Create Number   //////
+///////////////////////////
+
+const config = require('./config/config.js').config;
+var request = require('request');
+
+let url = config.phoneNumberUrl;
+let auth = {
+    username: config.email,
+    password: config.pass
+}
+let data = {
+    "phone_number":{
+        "id":     1,
+        "number": "+16674015276",
+        "token": config.token
+      }
+}
+request.post({ url: url, auth: auth, qs: data }, (error, req, body) => {
+    if (error) {
+        console.log(error);
+    }
+    console.log(body);
+})
+
+
 
 
 
