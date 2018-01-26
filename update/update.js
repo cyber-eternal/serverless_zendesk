@@ -1,18 +1,16 @@
 'use strict';
-
+const config = require('../config/config.js').config;
 const Zendesk = require('zendesk-node-api');
 
 const zendesk = new Zendesk({
-    url: YOUR_ZENDESK_URL, // https://example.zendesk.com
-    email: YOUR_ZENDESK_EMAIL, // me@example.com
-    token: YOUR_ZENDESK_API_TOKEN // hfkUny3vgHCcV3UfuqMFZWDrLKms4z3W2f6ftjPT
+    url: config.url, 
+    email: config.email, 
+    token: config.token 
 });
 
+
 module.exports.update = (event, context, callback) => {
-    zendesk.objects.update(OBJECT_ID, {
-        // keys and values from the zendesk docs
-        // https://developer.zendesk.com/rest_api/docs/core/
-    }).then(function(result){
+    zendesk.objects.update(OBJECT_ID, {}).then(function(result){
         const response = {
             statusCode: 200,
             body: JSON.stringify({
@@ -20,10 +18,7 @@ module.exports.update = (event, context, callback) => {
               input: event
             }),
           };
-        
           callback(null, response);
         console.log(result);
     })
-  
-
 };

@@ -1,5 +1,4 @@
 'use strict';
-
 const config = require('../config/config.js').config;
 const Zendesk = require('zendesk-node-api');
 
@@ -10,7 +9,7 @@ const zendesk = new Zendesk({
 });
 
 module.exports.list = (event, context, callback) => {
-    zendesk.tickets.list().then(function (result) {
+    zendesk.objects.show(OBJECT_ID).then(function(result){
         const response = {
             statusCode: 200,
             body: JSON.stringify({
@@ -19,6 +18,6 @@ module.exports.list = (event, context, callback) => {
             })
         };
         callback(null, response);
-        console.log(result);
-    });
+        console.log(result);   
+     });
 };
